@@ -1,0 +1,6 @@
+.DS_Store
+
+# Dépendances installées, jamais versionnées
+node_modules/
+__pycache__/
+*.pyc

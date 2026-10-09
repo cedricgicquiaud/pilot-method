@@ -1,0 +1,226 @@
+<title>Le circuit Linear · GitHub · Claude</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+  :root {
+    --bg: #EEF1F5;
+    --surface: #FFFFFF;
+    --ink: #1B2430;
+    --muted: #5B6878;
+    --line: #CBD2DC;
+    --linear: #5E6AD2;
+    --github: #24292F;
+    --claude: #C8643E;
+    --linear-soft: #E7E9F9;
+    --github-soft: #E3E6EA;
+    --claude-soft: #F8E6DE;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151A21;
+      --surface: #1E252E;
+      --ink: #ECEFF3;
+      --muted: #A3AEBD;
+      --line: #39434F;
+      --linear: #8B94E8;
+      --github: #D5DBE3;
+      --claude: #E8926D;
+      --linear-soft: #2A2E4A;
+      --github-soft: #2B323B;
+      --claude-soft: #3F2A22;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151A21;
+    --surface: #1E252E;
+    --ink: #ECEFF3;
+    --muted: #A3AEBD;
+    --line: #39434F;
+    --linear: #8B94E8;
+    --github: #D5DBE3;
+    --claude: #E8926D;
+    --linear-soft: #2A2E4A;
+    --github-soft: #2B323B;
+    --claude-soft: #3F2A22;
+  }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Source Sans 3", "Helvetica Neue", Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.55;
+    margin: 0;
+    padding: 3rem 1.25rem 5rem;
+  }
+  main { max-width: 46rem; margin: 0 auto; display: flex; flex-direction: column; gap: 3.5rem; }
+  h1, h2, h3 { font-family: "Sora", "Helvetica Neue", Arial, sans-serif; text-wrap: balance; margin: 0; }
+  h1 { font-size: 2.1rem; font-weight: 700; line-height: 1.15; }
+  h2 { font-size: 1.35rem; font-weight: 600; }
+  h3 { font-size: 1rem; font-weight: 600; }
+  p { margin: 0; max-width: 38rem; }
+  header { display: flex; flex-direction: column; gap: 1rem; }
+  .lede { font-size: 1.2rem; color: var(--muted); }
+  section { display: flex; flex-direction: column; gap: 1.25rem; }
+  .eyebrow { font-family: "Sora", sans-serif; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  figure { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 1.25rem; overflow-x: auto; }
+  figure svg { display: block; max-width: 100%; height: auto; font-family: "Source Sans 3", sans-serif; }
+  figcaption { font-size: .95rem; color: var(--muted); margin-top: .75rem; }
+  code { font-family: "JetBrains Mono", Menlo, monospace; font-size: .85em; background: var(--linear-soft); color: var(--linear); padding: .05em .35em; border-radius: 3px; }
+  .roles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .role { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .5rem; border-top: 4px solid var(--c); }
+  .role h3 { color: var(--c); }
+  .role p { font-size: .95rem; }
+  .role .not { color: var(--muted); font-style: italic; }
+  ol.story { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0; counter-reset: step; }
+  ol.story li { display: grid; grid-template-columns: 7rem 1fr; gap: 1rem; padding: .9rem 0; border-top: 1px solid var(--line); align-items: start; }
+  ol.story li:last-child { border-bottom: 1px solid var(--line); }
+  .who { font-family: "Sora", sans-serif; font-size: .8rem; font-weight: 600; padding: .2rem .55rem; border-radius: 999px; background: var(--soft); color: var(--c); justify-self: start; white-space: nowrap; margin-top: .15rem; }
+  .auto { font-size: .85rem; color: var(--muted); }
+  .rule { background: var(--surface); border-left: 4px solid var(--claude); padding: 1rem 1.25rem; border-radius: 0 6px 6px 0; }
+  @media (max-width: 640px) {
+    body { font-size: 17px; padding-top: 2rem; }
+    .roles { grid-template-columns: 1fr; }
+    ol.story li { grid-template-columns: 1fr; gap: .4rem; }
+  }
+</style>
+
+<main>
+  <header>
+    <p class="eyebrow">Pilotage de projet</p>
+    <h1>Le circuit Linear · GitHub · Claude</h1>
+    <p class="lede">Trois outils, trois rôles qui ne se recouvrent pas, et une seule règle qui les fait tenir ensemble.</p>
+  </header>
+
+  <section>
+    <h2>1. Chacun son métier</h2>
+    <div class="roles">
+      <div class="role" style="--c: var(--linear)">
+        <h3>Linear</h3>
+        <p>Le tableau de bord. Roadmap, features, tâches, statuts. C'est l'écran que tu regardes.</p>
+        <p class="not">Ne contient aucun code.</p>
+      </div>
+      <div class="role" style="--c: var(--github)">
+        <h3>GitHub</h3>
+        <p>L'atelier. Le code, les branches, les pull requests, les tests qui tournent.</p>
+        <p class="not">Tu n'y vas que pour relire du code ou merger.</p>
+      </div>
+      <div class="role" style="--c: var(--claude)">
+        <h3>Claude</h3>
+        <p>L'ouvrier. Lit la tâche dans Linear, écrit le code dans GitHub, ouvre la PR.</p>
+        <p class="not">Ne merge jamais : c'est toi qui décides.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>2. Qui parle à qui</h2>
+    <figure>
+      <svg viewBox="0 0 720 300" role="img" aria-label="Linear, GitHub et Claude reliés par trois flux : Claude lit les tickets dans Linear, Claude écrit le code et ouvre les PR dans GitHub, GitHub renvoie l'état des PR à Linear qui met à jour les tickets tout seul.">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+          </marker>
+        </defs>
+        <g fill="none" stroke-width="1.5">
+          <rect x="40" y="40" width="180" height="70" rx="6" fill="var(--linear-soft)" stroke="var(--linear)"/>
+          <rect x="500" y="40" width="180" height="70" rx="6" fill="var(--github-soft)" stroke="var(--github)"/>
+          <rect x="270" y="210" width="180" height="70" rx="6" fill="var(--claude-soft)" stroke="var(--claude)"/>
+        </g>
+        <g font-family="Sora, sans-serif" font-size="16" font-weight="600" text-anchor="middle">
+          <text x="130" y="70" fill="var(--linear)">Linear</text>
+          <text x="590" y="70" fill="var(--github)">GitHub</text>
+          <text x="360" y="240" fill="var(--claude)">Claude</text>
+        </g>
+        <g font-size="12" text-anchor="middle" fill="var(--muted)">
+          <text x="130" y="92">features, tâches, roadmap</text>
+          <text x="590" y="92">code, branches, PR</text>
+          <text x="360" y="262">lit, code, livre</text>
+        </g>
+        <!-- GitHub -> Linear : synchro automatique -->
+        <g stroke="currentColor" fill="none" stroke-width="1.5" marker-end="url(#arr)">
+          <line x1="500" y1="75" x2="222" y2="75"/>
+        </g>
+        <g font-size="12" text-anchor="middle" fill="currentColor">
+          <text x="360" y="66">PR ouverte → tâches « En revue »</text>
+          <text x="360" y="96">PR mergée → tâches « Terminée »</text>
+        </g>
+        <text x="360" y="122" font-size="11" text-anchor="middle" fill="var(--muted)" font-style="italic">automatique, une fois l'intégration branchée</text>
+        <!-- Claude -> Linear -->
+        <g stroke="currentColor" fill="none" stroke-width="1.5" marker-end="url(#arr)">
+          <path d="M300,210 C250,170 200,150 150,114"/>
+        </g>
+        <text x="170" y="168" font-size="12" text-anchor="middle" fill="currentColor">lit le backlog,</text>
+        <text x="170" y="184" font-size="12" text-anchor="middle" fill="currentColor">coche les tâches</text>
+        <!-- Claude -> GitHub -->
+        <g stroke="currentColor" fill="none" stroke-width="1.5" marker-end="url(#arr)">
+          <path d="M420,210 C470,170 520,150 570,114"/>
+        </g>
+        <text x="555" y="168" font-size="12" text-anchor="middle" fill="currentColor">crée la branche,</text>
+        <text x="555" y="184" font-size="12" text-anchor="middle" fill="currentColor">pousse le code, ouvre la PR</text>
+      </svg>
+      <figcaption>Claude alimente les deux outils ; GitHub prévient Linear tout seul quand une PR change d'état. Toi, tu ne regardes que la case de gauche.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>3. Les étages de Linear</h2>
+    <p>GitHub range tout à plat. Linear empile, et c'est l'empilement qui donne une roadmap. Attention au vocabulaire de Linear : ce qu'il appelle « projet » est une <strong>feature</strong> du produit, pas le produit lui-même.</p>
+    <figure>
+      <svg viewBox="0 0 720 320" role="img" aria-label="Boîtes imbriquées : une initiative contient des features, chaque feature contient des tâches.">
+        <g fill="none" stroke-width="1.5">
+          <rect x="20" y="20" width="680" height="280" rx="6" stroke="var(--line)" stroke-dasharray="6 4"/>
+          <rect x="40" y="70" width="310" height="210" rx="6" fill="var(--linear-soft)" stroke="var(--linear)"/>
+          <rect x="370" y="70" width="310" height="210" rx="6" fill="var(--linear-soft)" stroke="var(--linear)" opacity=".55"/>
+          <rect x="60" y="140" width="270" height="36" rx="4" fill="var(--surface)" stroke="var(--line)"/>
+          <rect x="60" y="186" width="270" height="36" rx="4" fill="var(--surface)" stroke="var(--line)"/>
+          <rect x="60" y="232" width="270" height="36" rx="4" fill="var(--surface)" stroke="var(--line)"/>
+          <rect x="390" y="140" width="270" height="36" rx="4" fill="var(--surface)" stroke="var(--line)" opacity=".55"/>
+          <rect x="390" y="186" width="270" height="36" rx="4" fill="var(--surface)" stroke="var(--line)" opacity=".55"/>
+        </g>
+        <g font-family="Sora, sans-serif" font-weight="600">
+          <text x="36" y="48" font-size="13" fill="var(--muted)">INITIATIVE · le grand cap, facultatif · « Première expérience »</text>
+          <text x="56" y="98" font-size="14" fill="var(--linear)">FEATURE · Onboarding guidé</text>
+          <text x="386" y="98" font-size="14" fill="var(--linear)" opacity=".7">FEATURE · Export PDF</text>
+        </g>
+        <g font-size="12" fill="var(--muted)">
+          <text x="56" y="118">(Linear dit « projet ») une chose nouvelle que le produit saura faire</text>
+          <text x="386" y="118" opacity=".7">la feature suivante sur la roadmap</text>
+        </g>
+        <g font-size="13" fill="currentColor">
+          <text x="72" y="163"><tspan font-family="JetBrains Mono, monospace" font-size="12" fill="var(--linear)">ABC-21</tspan>  Écran profil</text>
+          <text x="72" y="209"><tspan font-family="JetBrains Mono, monospace" font-size="12" fill="var(--linear)">ABC-22</tspan>  Écran objectif</text>
+          <text x="72" y="255"><tspan font-family="JetBrains Mono, monospace" font-size="12" fill="var(--linear)">ABC-23</tspan>  Écran infos complémentaires</text>
+          <text x="402" y="163" opacity=".6"><tspan font-family="JetBrains Mono, monospace" font-size="12" fill="var(--linear)">ABC-30</tspan>  Mise en page imprimable</text>
+          <text x="402" y="209" opacity=".6"><tspan font-family="JetBrains Mono, monospace" font-size="12" fill="var(--linear)">ABC-31</tspan>  Bouton « Télécharger »</text>
+        </g>
+        <text x="320" y="256" font-size="11" text-anchor="end" fill="var(--muted)" font-style="italic"></text>
+      </svg>
+      <figcaption>Une feature (« projet » chez Linear) est une grande fonctionnalité : des semaines, une barre sur la roadmap. Elle se livre en plusieurs livraisons (« jalons »), une PR chacune. Une tâche (« ticket ») prend quelques heures. Quand toutes les tâches sont terminées, la feature est finie et sa barre atteint 100 %.</figcaption>
+    </figure>
+    <p>Trois règles gouvernent ce qui s'enchaîne. <strong>Les dépendances sont rares et réelles</strong> : on ne relie deux features que si inverser l'ordre casse — pas si c'est juste l'ordre prévu. <strong>La frise montre le scénario retenu</strong> : le plan auquel on croit reste daté, même derrière une décision pas encore prise ; l'autre branche attend en réserve, sans dates, et une alerte rappelle chaque session de retard de la décision. <strong>Les dates se recalent en racontant</strong> : Linear ne décale jamais rien tout seul ; c'est Claude qui replanifie à chaque session et ouvre par le récit — ce qui a glissé, et la marge restante avant la date butoir du projet.</p>
+  </section>
+
+  <section>
+    <h2>4. Une feature, du début à la fin</h2>
+    <p>Ce qui se passe réellement pour « Onboarding guidé » (trois écrans à la première connexion), et qui appuie sur le bouton à chaque étape.</p>
+    <ol class="story">
+      <li><span class="who" style="--c: var(--ink); --soft: var(--github-soft)">Toi</span><div>Au cadrage du projet, je te propose la liste de toutes ses features, avec une taille (S, M, L, XL). Tu valides, je les pose sur la roadmap, statut « À cadrer », sans aucune tâche. « Onboarding guidé » en fait partie.</div></li>
+      <li><span class="who" style="--c: var(--claude); --soft: var(--claude-soft)">Claude</span><div>Quand son tour vient, on cadre la feature : les décisions produit, et surtout <strong>la liste de ce qui devra être vrai à la fin</strong> — dix à trente phrases observables, dont un tiers de refus (« un écran sans titre ne s'enregistre pas »). Un agent relit ce cadrage et te dit ce qui manque, sans proposer de solution. Tu valides.</div></li>
+      <li><span class="who" style="--c: var(--claude); --soft: var(--claude-soft)">Claude</span><div>Je découpe la feature en <strong>livraisons qui ne touchent pas les mêmes fichiers</strong> — c'est ce qui permettra de les produire séparément sans que les travaux se télescopent. Chaque phrase du cadrage est affectée à une livraison. Tu valides, je crée <em>toutes</em> les tâches d'un coup (<code>ABC-21</code>, <code>ABC-22</code>, <code>ABC-23</code>…) au moule : problème, action, terminé quand. La feature passe « Planifiée ».</div></li>
+      <li><span class="who" style="--c: var(--claude); --soft: var(--claude-soft)">Agents</span><div>La production, sans toi. Une copie du dépôt par livraison, et dedans un agent — un par tâche sur une grosse livraison. Il écrit d'abord le test qui échoue, puis le code minimal qui le fait réussir — un enregistrement par étape, pour qu'on puisse prouver après coup que le test précédait le code. À chaque tâche finie, elle passe en « Terminé » dans Linear et ta barre avance.</div></li>
+      <li><span class="who" style="--c: var(--claude); --soft: var(--claude-soft)">Agents</span><div>La vérification, par <strong>deux agents qui n'ont pas écrit le code</strong>. L'un relit les lignes changées et <strong>relance les tests lui-même</strong> : un rapport qui reprend les chiffres de celui qu'il contrôle ne prouve rien. L'autre ouvre l'application et regarde les écrans livrés. Jamais les deux à la fois — c'est ce qui fait deux preuves différentes. S'ils trouvent quelque chose, un troisième agent corrige la liste, une seule fois.</div></li>
+      <li><span class="who" style="--c: var(--claude); --soft: var(--claude-soft)">Claude</span><div>J'ouvre la PR sur GitHub, titre « <code>ABC-21</code> Écran de bienvenue », avec le rapport d'audit : ce qui est <em>prouvé</em>, ce qu'il te reste <em>à relire</em>, et <em>les décisions à trancher</em> que les agents ont refusé de prendre en chemin. Dernière ligne : <code>Closes ABC-21, ABC-22, ABC-23</code>. Je passe la feature « En revue », et je m'arrête.</div></li>
+      <li><span class="who" style="--c: var(--github); --soft: var(--github-soft)">GitHub → Linear</span><div>Les tâches passent « En revue » dans Linear. <span class="auto">Personne n'a rien fait : c'est l'intégration.</span></div></li>
+      <li><span class="who" style="--c: var(--ink); --soft: var(--github-soft)">Toi</span><div>Tu relis la PR et tu merges. C'est aussi là que tu tranches les décisions remontées : sans ta réponse, la livraison suivante les devinerait.</div></li>
+      <li><span class="who" style="--c: var(--github); --soft: var(--github-soft)">GitHub → Linear</span><div>PR mergée : les trois tâches passent « Terminée », la livraison est finie, la barre de la feature avance. Livraison suivante, même circuit, jusqu'à 100 %. <span class="auto">Automatique aussi.</span></div></li>
+      <li><span class="who" style="--c: var(--claude); --soft: var(--claude-soft)">Claude</span><div>À ma session suivante, je constate le merge et je passe la feature « Terminée ». <strong>Puis j'apprends</strong> : chaque défaut trouvé à l'audit devient une règle écrite dans le <code>CLAUDE.md</code> du dépôt, que la livraison suivante appliquera. Les décisions que tu as tranchées sont gravées dans la fiche. Les idées apparues en chemin deviennent des tâches sans feature. Puis je prends la feature suivante.</div></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>5. La seule règle</h2>
+    <div class="rule">
+      <p><strong>Le code de la tâche voyage dans le nom de la branche et le titre de la PR.</strong> C'est ce qui permet à Linear de reconnaître ses tâches dans ce que fait GitHub, et de les faire avancer sans que personne n'y touche — les tâches seulement : le statut d'une feature, c'est Claude qui le pose. Et rien n'est créé dans Linear sans ta validation. Sans ce code, les deux outils ne se reconnaissent pas et tu retombes sur deux listes à tenir à la main.</p>
+    </div>
+    <p>Ce qui ne s'automatise pas, par choix : ta décision de merger, et l'ordre des features sur la roadmap. Le reste suit.</p>
+  </section>
+</main>
