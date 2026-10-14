@@ -1,11 +1,15 @@
 # pilot
 
 _A method to run a software project with Linear, GitHub and Claude Code: AI agents frame, build,
-review and fix the code, a human merges. Documentation in French; agent prompts and tools in
+review and fix the code, and I merge. Documentation in French; agent prompts and tools in
 `implementation/`._
 
+![Le circuit PILOT : cadrer, découper, produire, merger, apprendre](images/circuit.png)
+
 Une méthode pour mener un projet logiciel avec Linear, GitHub et Claude Code — et le code qui
-la fait tourner.
+la fait tourner. Je l'ai conçue pour une raison simple : avec des agents de code, écrire n'est
+plus le goulot, vérifier l'est. Alors celui qui écrit le code n'est jamais celui qui le
+vérifie, et c'est moi qui merge.
 
 Ce dépôt contient les deux : les documents qui expliquent la méthode, et son implémentation,
 qui s'installe dans chaque projet.
@@ -53,6 +57,28 @@ Trois invariants, jamais négociés :
 2. **Les décisions de fond remontent**, elles ne se tranchent pas en chemin.
 3. **Pas de code sans test préalable** — l'historique des commits en est la preuve, et un agent
    la contrôle.
+
+## Ce que ça donne
+
+Éprouvée sur un bac à sable (« Carnet », un CRM léger produit uniquement par cette méthode), sur
+mon site portfolio et sur deux projets réels :
+
+- **8 défauts** attrapés par l'audit derrière des tests verts, tous corrigés avant la PR ;
+- **0,66 h** de session pour une feature que mon barème estimait à 2,44 h ;
+- **23 livraisons** et 67 tâches livrées sur le bac à sable, trois producteurs en parallèle
+  sans conflit.
+
+Le rapport que la boucle poste dans chaque PR, avant mon merge : ce qui est prouvé, ce que je
+dois juger, les décisions à trancher.
+
+![Rapport d'audit d'une PR du bac à sable](images/rapport-audit.png)
+
+L'historique d'une livraison : un commit de test rouge, puis le code qui le fait passer. Le
+`verifier` rejoue cet ordre commit par commit.
+
+![Historique git d'une livraison du bac à sable](images/historique.png)
+
+Le détail, avec ce qui reste à prouver : [la fiche PILOT](https://cedricgicquiaud.github.io/projets/pilot/).
 
 ## Les fichiers
 
