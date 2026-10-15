@@ -4,7 +4,7 @@ _A method to run a software project with Linear, GitHub and Claude Code: AI agen
 review and fix the code, and I merge. Documentation in French; agent prompts and tools in
 `implementation/`._
 
-![Le circuit PILOT : cadrer, découper, produire, merger, apprendre](images/circuit.png)
+![Le circuit PILOT : comprendre, lister, préparer, fabriquer, décider](images/circuit.png)
 
 Une méthode pour mener un projet logiciel avec Linear, GitHub et Claude Code — et le code qui
 la fait tourner. Je l'ai conçue pour une raison simple : avec des agents de code, écrire n'est
@@ -16,13 +16,14 @@ qui s'installe dans chaque projet.
 
 ## Le principe
 
-Trois outils, trois rôles, et rien qui se recopie d'un endroit à l'autre.
+PILOT fait avancer un projet en cinq étapes. Je décide aux moments clés. Entre deux décisions,
+Claude et ses agents travaillent seuls.
 
 | | |
 |---|---|
 | **Linear** | Le tableau de bord. Ce qu'on fait, dans quel ordre, où on en est. |
-| **GitHub** | L'atelier. Le code, les branches, les pull requests. |
-| **Claude Code** | L'ouvrier. Il cadre, il découpe, il produit, il vérifie. |
+| **GitHub** | L'atelier. C'est là que vit le code. |
+| **Claude Code** | Le chef d'atelier. Il lit le tableau, fait le travail ou le confie à ses agents, puis met le tableau à jour. |
 
 Une seule règle fait tenir l'ensemble : **le code de la tâche Linear voyage dans le nom de la
 branche et dans le titre de la PR.** Tout le reste en découle — Linear lit GitHub et se met à
@@ -37,52 +38,76 @@ finit par désigner deux choses.
 |---|---|---|
 | Team | **Projet** | des mois |
 | Project | **Feature** | des semaines |
-| Milestone | **Livraison** — une PR | des jours |
+| Milestone | **Livrable** — une PR | des jours |
 | Issue | **Tâche** | des heures |
 
 Ne jamais dire « projet » pour un Project Linear : c'est une feature.
 
-## Ce que fait la boucle d'agents
+## Les cinq étapes
 
-Une feature cadrée est découpée en livraisons qui ne se marchent pas dessus. Chacune est
-produite par un agent seul dans sa copie du dépôt, en test-d'abord strict. Deux autres agents
-la relisent — l'un le code, l'autre les écrans — sans jamais la corriger. Un troisième corrige
-ce qu'ils ont trouvé, une seule fois.
+1. **Comprendre le projet** (`init`, une fois). Claude fait une recherche approfondie sur l'état
+   de l'art et les meilleures pratiques du domaine, m'interroge par séries de questions en
+   proposant chaque fois une réponse, puis écrit la page produit. Je valide.
+2. **Faire la liste des fonctionnalités** (`roadmap`). Claude les propose dans l'ordre ; le
+   contradicteur, un agent qui ne fait que chercher ce qui manque, la relit. Je valide.
+3. **Préparer une fonctionnalité** (`feature`). D'abord le contrat : 10 à 30 phrases
+   vérifiables, dont au moins un tiers disent ce qui doit être impossible. Puis le découpeur la
+   partage en livrables qui ne touchent jamais le même fichier, pour les fabriquer en même
+   temps. Je valide les deux.
 
-Puis la PR s'ouvre, et **c'est toi qui merges**.
+   ![Une tâche réelle de l'application mobile de santé dans Linear](images/linear.png)
+
+   _Une tâche réelle de l'application mobile de santé, dans Linear : le problème, ce qu'on fait,
+   et la liste « Terminé quand », refus compris, que les agents doivent tenir._
+
+4. **Fabriquer** (`run`), la seule étape sans moi. Chaque livrable a sa copie du projet. Le
+   tdd-writer écrit le test, vérifie qu'il échoue, puis écrit le code ; chaque étape est
+   enregistrée à part, l'historique le prouve. Le verifier relit le code et le testeur utilise
+   l'application ; aucun des deux ne l'a écrit, aucun ne le modifie. Le correcteur répare leur
+   liste de défauts, une seule fois. La PR s'ouvre avec son rapport, puis tout s'arrête.
+
+   ![Le chef d'atelier et les six agents](images/agents.png)
+
+5. **Décider et apprendre** (merge, puis `sync`). **C'est moi qui merge**, jamais un agent : un
+   verrou technique les en empêche. Claude remet Linear à jour, et chaque erreur qui pourrait
+   revenir devient une règle écrite que les agents liront la fois suivante.
+
+   ![Une PR réelle de mon site, écrite par l'agent](images/pr.png)
+
+   _Une PR réelle de mon site, écrite par l'agent : le code de la tâche dans le titre, ce qui
+   change expliqué en clair. C'est moi qui l'accepte._
 
 Trois invariants, jamais négociés :
 
-1. **Le merge est humain**, à chaque livraison.
+1. **Le merge est humain**, à chaque livrable.
 2. **Les décisions de fond remontent**, elles ne se tranchent pas en chemin.
-3. **Pas de code sans test préalable** — l'historique des commits en est la preuve, et un agent
-   la contrôle.
+3. **Pas de code sans test préalable** (Test Driven Development) : l'historique des commits en
+   est la preuve, et un agent la contrôle.
+
+## Les six agents
+
+Fable sert à juger, Opus à fabriquer, Sonnet à exécuter.
+
+| Agent | Ce qu'il fait | Ce qu'il ne fait jamais | Modèle |
+|---|---|---|---|
+| contradicteur | Cherche ce qui manque ou se contredit | Répondre à ma place | Fable |
+| découpeur | Partage le travail en livrables qui ne se gênent pas | Décider seul | Fable |
+| tdd-writer | Écrit le test, puis le code, puis ouvre la PR | Sortir de son livrable | Opus |
+| verifier | Relit le code et vérifie les preuves | Corriger | Fable |
+| testeur | Utilise l'application et prend des captures | Corriger | Sonnet |
+| correcteur | Répare la liste des défauts, une seule fois | Toucher à autre chose | Opus |
 
 ## Ce que ça donne
 
 Utilisée sur mes projets réels (mon site portfolio : 67 livraisons depuis fin août, un projet
 client, une application mobile), après un rodage sur un projet d'essai complet :
 
-- **8 défauts** attrapés par l'audit derrière des tests verts, tous corrigés avant la PR ;
-- **0,66 h** de session pour une feature que mon barème estimait à 2,44 h ;
-- **23 livraisons** et 67 tâches livrées sur le projet d'essai, trois producteurs en parallèle
+- **8 défauts** attrapés par le verifier derrière des tests verts, tous corrigés avant la PR ;
+- **0,66 h** de session pour une fonctionnalité que mon barème estimait à 2,44 h ;
+- **23 livrables** et 67 tâches livrées sur le projet d'essai, trois tdd-writer en parallèle
   sans conflit.
 
-Les six agents, leur rôle et ce que chacun a le droit de faire :
-
-![Les six agents de PILOT](images/agents.png)
-
-Une tâche réelle de mon site dans Linear : le problème, ce qu'on fait, et la liste « Terminé
-quand », refus compris, que les agents doivent tenir.
-
-![Une tâche Linear de mon site](images/linear.png)
-
-La PR qui livre cette tâche, écrite par l'agent : le code de la tâche dans le titre, ce qui
-change expliqué en clair. C'est moi qui l'accepte.
-
-![La PR qui livre la tâche](images/pr.png)
-
-Le détail, avec ce qui reste à prouver : [la fiche PILOT](https://cedricgicquiaud.github.io/projets/pilot/).
+Le détail : [la fiche PILOT](https://cedricgicquiaud.github.io/projets/pilot/).
 
 ## Les fichiers
 
@@ -106,7 +131,7 @@ la Partie B du Markdown.
 | Démarrer un projet | `/pilot init` | Le PRD est à valider |
 | Poser toutes les features | `/pilot roadmap` | La liste est à valider |
 | Ouvrir une feature | `/pilot feature <nom>` | Le cadrage, puis le découpage, sont à valider |
-| Produire les livraisons | `/pilot run <feature>` | Les PR sont ouvertes et auditées ; tu merges |
+| Fabriquer les livrables | `/pilot run <feature>` | Les PR sont ouvertes et auditées ; tu merges |
 | Remettre Linear d'aplomb après un merge | `/pilot sync` | Il enchaîne sur `next` |
 | Corriger un bug ou faire une retouche hors feature | `/pilot fix <description>` | La PR est ouverte |
 | Comprendre un bug qui ne se reproduit pas | dis « diagnostique » | La cause est nommée |
@@ -142,7 +167,7 @@ le dépôt.
 ## Mettre à jour un projet
 
 Depuis le projet, `/pilot update`. Il va chercher la dernière version, dit en trois lignes ce
-qui change pour ton travail, et commite. Il refuse de tourner pendant qu'une livraison est en
+qui change pour ton travail, et commite. Il refuse de tourner pendant qu'un livrable est en
 cours : un agent lancé avec les anciennes fiches ne doit pas finir avec les nouvelles.
 
 ## La règle qui tient tout
