@@ -96,7 +96,7 @@ répond oui ou non ; `next` lit Linear et propose l'étape logique à tout momen
 **Lis le fichier de `reference/` avant d'exécuter une commande** : les étapes, les arrêts et
 les gabarits y sont ; jouée d'après ce résumé, une commande saute la moitié de son travail.
 
-### Cadrer — `reference/cadrer.md`
+### Cadrer — `reference/init.md`, `roadmap.md`, `feature.md`
 
 | Commande | Ce qu'elle fait | Elle s'arrête sur |
 |---|---|---|

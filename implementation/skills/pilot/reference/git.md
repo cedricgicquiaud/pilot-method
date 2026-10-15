@@ -1,6 +1,6 @@
 # Git et GitHub — branches, release, la PR, le verrou
 
-_Lu par `run`, `fix` et `sync`, et par `init` qui pose le gabarit de PR dans le dépôt._
+_Lu par `run`, `fix` et `sync`, et par `init` qui pose les gabarits du dépôt._
 
 ## Branches
 
@@ -32,8 +32,16 @@ _Lu par `run`, `fix` et `sync`, et par `init` qui pose le gabarit de PR dans le 
     des faits, pas des cases à cocher ;
   - `## Hors périmètre / risques` : souvent, les livraisons suivantes ;
   - dernière ligne `Closes <CODE>-a, <CODE>-b, …`, toutes les tâches de la livraison.
-- Chaque dépôt piloté porte ce gabarit dans `.github/PULL_REQUEST_TEMPLATE.md` (posé par
-  `init`, pré-rempli par GitHub pour les PR ouvertes à la main).
+## Les gabarits du dépôt
+
+Posés par `init`, s'ils manquent :
+- `.github/PULL_REQUEST_TEMPLATE.md` au gabarit de PR ci-dessus (codes du projet), pré-rempli
+  par GitHub pour les PR ouvertes à la main ;
+- `.github/ISSUE_TEMPLATE/config.yml`, qui neutralise les issues GitHub et renvoie vers
+  Linear :
+  `blank_issues_enabled: false` + `contact_links: [{name: "Les tâches se suivent dans
+  Linear", url: "<url de la team>/all", about: "Aucune issue GitHub sur ce projet."}]`
+  (le suffixe `/all` ouvre directement la liste des tâches, pas l'accueil de la team).
 
 ## Le merge est humain
 
