@@ -60,23 +60,27 @@ Trois invariants, jamais négociés :
 
 ## Ce que ça donne
 
-Éprouvée sur un bac à sable (« Carnet », un CRM léger produit uniquement par cette méthode), sur
-mon site portfolio et sur deux projets réels :
+Utilisée sur mes projets réels (mon site portfolio : 67 livraisons depuis fin août, un projet
+client, une application mobile), après un rodage sur un projet d'essai complet :
 
 - **8 défauts** attrapés par l'audit derrière des tests verts, tous corrigés avant la PR ;
 - **0,66 h** de session pour une feature que mon barème estimait à 2,44 h ;
-- **23 livraisons** et 67 tâches livrées sur le bac à sable, trois producteurs en parallèle
+- **23 livraisons** et 67 tâches livrées sur le projet d'essai, trois producteurs en parallèle
   sans conflit.
 
-Le rapport que la boucle poste dans chaque PR, avant mon merge : ce qui est prouvé, ce que je
-dois juger, les décisions à trancher.
+Les six agents, leur rôle et ce que chacun a le droit de faire :
 
-![Rapport d'audit d'une PR du bac à sable](images/rapport-audit.png)
+![Les six agents de PILOT](images/agents.png)
 
-L'historique d'une livraison : un commit de test rouge, puis le code qui le fait passer. Le
-`verifier` rejoue cet ordre commit par commit.
+Une tâche réelle de mon site dans Linear : le problème, ce qu'on fait, et la liste « Terminé
+quand », refus compris, que les agents doivent tenir.
 
-![Historique git d'une livraison du bac à sable](images/historique.png)
+![Une tâche Linear de mon site](images/linear.png)
+
+La PR qui livre cette tâche, écrite par l'agent : le code de la tâche dans le titre, ce qui
+change expliqué en clair. C'est moi qui l'accepte.
+
+![La PR qui livre la tâche](images/pr.png)
 
 Le détail, avec ce qui reste à prouver : [la fiche PILOT](https://cedricgicquiaud.github.io/projets/pilot/).
 
