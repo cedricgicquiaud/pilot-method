@@ -107,6 +107,9 @@ Au modèle du § 2.4 de `BOUCLE-AGENTS.md` :
   vers l'app locale ;
 - les outils MCP Linear de lecture et `save_issue` / `save_project` / `save_comment`.
 
+**Ne jamais autoriser : la suppression de fichiers, le merge, le réseau autre que `git push`
+et `curl` vers l'app locale.**
+
 **Une commande composée n'est autorisée que si chacun de ses morceaux l'est** : un agent qui
 écrit `pkill -f "next dev"; sleep 1; curl localhost:3000` attend un humain sur `sleep`, même
 si `pkill` est autorisé, et personne n'est devant l'écran pour cliquer.
