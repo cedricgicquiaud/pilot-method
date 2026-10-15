@@ -1,9 +1,5 @@
 # `init` — cadrer et déclarer un projet piloté
 
-_Une fois par projet. Règles communes : `entretien.md` (comment poser les questions),_
-_`fiches.md` (le moule, tailles, priorités, dates), `linear.md` (l'outil), `git.md`_
-_(branches, PR, gabarits du dépôt)._
-
 | Quand | Il lit | Il produit | Il s'arrête sur |
 |---|---|---|---|
 | Premier jour d'un projet | Le dépôt, son PRD ou son README s'il y en a | `.pilot/recherche.md`, `.pilot/PRD.md`, `.pilot/design.md`, la team Linear, la section `## Pilot`, `CONTEXT.md`, les gabarits GitHub, l'allowlist | La validation du PRD, puis celle de la direction visuelle |
@@ -28,8 +24,7 @@ lire et passer à l'étape 4.
    légales), ce que font les produits comparables. Le document va dans `.pilot/recherche.md`.
    _Pourquoi : au moment du PRD, personne ne sait encore rien, et une supposition posée là se
    paie sur toute la roadmap._
-2. **Puis l'entretien**, informé par ce qu'on a trouvé, selon `entretien.md` : la frontière
-   des questions par rounds numérotés, chacune avec une réponse recommandée.
+2. **Puis l'entretien**, informé par ce qu'on a trouvé, selon `entretien.md`.
    Trois rounds, en général : utilisateurs et problème ; périmètre et hors périmètre ;
    contraintes (stack, échéance, environnements) et versions ou thèmes s'il y en a.
    Écrire le résultat dans `.pilot/PRD.md`, une page : utilisateurs, problème, périmètre V1,
@@ -66,9 +61,8 @@ lire et passer à l'étape 4.
    fixer (un mot par concept, les synonymes à éviter) ; pas de `docs/adr/` avant la première
    ADR.
 10. **Si un second membre est prévu** : écrire `.mcp.json` à la racine (annexe C). Chaque
-    membre clone, fait `/mcp` → s'authentifie avec son compte Linear. La méthode est déjà dans
-    `.claude/`, versionnée avec le dépôt : tout le monde travaille avec la même. Aucune clé
-    API dans le dépôt.
+    membre clone, fait `/mcp` → s'authentifie avec son compte Linear. La clé API reste dans
+    le `~/.config/pilot/` de chacun.
 
 ## Meubler le dépôt
 
@@ -80,8 +74,8 @@ lire et passer à l'étape 4.
 13. **Poser la base de la boucle.**
     - Les lignes `Lancer l'app :` et `Testeur :` de la section Pilot, déduites de la stack
       (annexe A), confirmées d'un mot.
-    - Si `.claude/settings.json` n'existe pas : l'écrire avec l'allowlist de l'annexe B. Le
-      hook de suivi y est déjà, posé par `install.sh` ; ne pas y toucher.
+    - Si `.claude/settings.json` n'a pas encore de liste `permissions.allow` : l'ajouter
+      selon l'annexe B, sans toucher aux hooks posés par `install.sh` (suivi, verrou git).
     - `.pilot/MISSION.template.md`, copié depuis `reference/MISSION.template.md`, commande de
       tests adaptée.
 14. Si aucun barème n'existe : proposer `benchmark`.
@@ -99,7 +93,6 @@ lire et passer à l'étape 4.
 
 ## Annexe B — L'allowlist de `.claude/settings.json`
 
-Au modèle du § 2.4 de `BOUCLE-AGENTS.md` :
 - la commande de tests, la commande de lancement de l'app et celle de build ;
 - `git status/diff/log/show/add/commit/push/branch` ;
 - les lectures : `ls`, `cat`, `grep`, `find`, `head`, `tail`, `sort`, `echo` ;

@@ -25,7 +25,7 @@ fi
 
 PROJET="$(cd "$1" 2>/dev/null && pwd)" || { echo "Dossier introuvable : $1" >&2; exit 1; }
 
-if [ ! -d "$PROJET/.git" ]; then
+if [ ! -e "$PROJET/.git" ]; then  # un dossier, ou un fichier dans un worktree
   echo "« $PROJET » n'est pas un dépôt git." >&2
   echo "La méthode se versionne avec le projet : sans dépôt, l'installation n'a pas de sens." >&2
   exit 1

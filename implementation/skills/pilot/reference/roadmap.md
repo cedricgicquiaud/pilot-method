@@ -1,8 +1,5 @@
 # `roadmap` — poser toutes les features du projet
 
-_Règles communes : `fiches.md` (le moule, tailles, priorités, dates, dépendances),_
-_`linear.md` (l'outil, icônes et couleurs)._
-
 | Quand | Il lit | Il produit | Il s'arrête sur |
 |---|---|---|---|
 | Après `init`, ou quand le cadrage change | PRD, spec, README, plan validé, backlog existant | Les features et leurs livraisons dans Linear, datées ; `.pilot/design/PROMPT.md` si demandé | La validation de la liste, puis le système de design |
@@ -15,15 +12,16 @@ Relançable : ne propose que les features nouvelles.
 
 1. Lire le cadrage disponible (PRD, spec, README, plan validé, backlog existant).
 2. Proposer **la liste complète des features** (grandes fonctionnalités, échelle semaines) et,
-   pour chacune, **ses livraisons** (titre-résultat + taille S/M/L/XL) et l'ordre suggéré.
+   pour chacune, **ses livraisons** (titre-résultat + taille S/M/L/XL) et l'ordre suggéré ;
+   si la feature ne peut pas commencer avant une autre, une ligne « dépend de » (test de
+   l'inversion : `fiches.md` § Dépendances).
    Signaler ce qui existe déjà dans Linear. **Ne rien créer.**
    On ne découpe pas en tâches à ce stade : le découpage complet d'une feature se fait à son
    ouverture (`feature` / `next`), jamais avant, jamais par morceaux.
 3. Lancer l'agent `contradicteur` sur la liste proposée : ce qui manque, ce qui se contredit,
    ce qu'on ne saura pas vérifier.
    Si la roadmap engage plusieurs mois : proposer à l'humain de basculer sa session (`/model`)
-   sur le modèle le plus capable le temps de la poser. Une roadmap est un dialogue : elle ne
-   se délègue pas à un agent, mais le modèle qui la tient peut être choisi.
+   sur le modèle le plus capable le temps de la poser.
 4. Dialoguer : fusions, coupes, rejets, réordonnancement.
 5. **ARRÊT — attendre « validé ».**
 

@@ -1,8 +1,5 @@
 # `feature <description>` — cadrer puis découper une feature
 
-_Règles communes : `entretien.md` (comment poser les questions), `fiches.md` (le moule,_
-_après création), `domaine.md` (`CONTEXT.md`), `template-tache.md` (le « Terminé quand »)._
-
 | Quand | Il lit | Il produit | Il s'arrête sur |
 |---|---|---|---|
 | À l'ouverture d'une feature « À cadrer » | Sa fiche, le PRD, `CONTEXT.md`, le code concerné | Les décisions produit et le contrat de validation dans la fiche feature, puis toutes ses tâches dans Linear | Le cadrage, puis le découpage |
@@ -29,10 +26,10 @@ fabrique et dans quel fichier.
    - les **décisions produit** (choix tranchés, avec l'option retenue) ;
    - le **contrat de validation** : 10 à 30 phrases « ce qui devra être vrai », observables
      par l'utilisateur, dont au moins un tiers de refus (ce qui doit être impossible ou
-     rejeté). Pas de formule générique valable pour n'importe quelle feature.
-4. **Lancer l'agent `contradicteur`** sur ce que tu viens d'écrire : il rend les cas non
+     rejeté). Chaque phrase nomme un écran, une donnée ou une valeur de cette feature.
+4. **Lancer l'agent `contradicteur`** sur la proposition : il rend les cas non
    prévus, les phrases invérifiables, les règles qui se contredisent et le supposé connu.
-   Présenter ses questions à l'humain **avec** ta proposition, sans y répondre à sa place :
+   Présenter ses questions à l'humain **avec** la proposition, sans y répondre à sa place :
    chacune se solde par « à ajouter » ou « hors périmètre ».
    _Pourquoi : c'est le seul moment où un oubli coûte encore une phrase et pas une journée. Un
    cadrage validé sans ce passage est validé à l'aveugle._
@@ -45,8 +42,8 @@ fabrique et dans quel fichier.
 
 7. **Lancer l'agent `decoupeur`** sur la feature cadrée : il propose les livraisons, les
    fichiers que chacune ouvrira, ce qui les rend indépendantes, et **les frontières dont il
-   n'est pas sûr**. Son découpage est une proposition, pas une décision : tu le reprends, tu
-   le corriges si le dépôt le contredit, et les frontières incertaines vont à l'humain.
+   n'est pas sûr**. Son découpage est une proposition, pas une décision : le reprendre, le
+   corriger si le dépôt le contredit, et soumettre les frontières incertaines à l'humain.
 8. **Proposer le squelette de toute la feature, sans rien créer.** Pour chaque livraison
    (jalon) :
    - ses tâches (titre court + une ligne, label Type) ;
@@ -73,7 +70,8 @@ fabrique et dans quel fichier.
     tâches**, `sortOrder` = rang (API `issueUpdate`).
     Dans la description de chaque jalon : ses fichiers et ses numéros de contrat (c'est ce que
     `run` recopie dans les `MISSION.md`).
-12. Passer la feature « Planifiée ». Mettre le lien recette (`UAT.md#<slug>` ou Notion).
+12. Passer la feature « Planifiée ». Mettre le lien recette (`UAT.md#<slug>` ou Notion)
+    dans la fiche feature, section « Recette » du template Feature.
 13. **Compter** : annoncé / créé. Sonder une fiche au hasard contre le moule (`fiches.md`).
 14. **Noter la durée du cadrage** dans `.pilot/calibration.md`, sous le nom de la feature :
     heure du lancement de `feature`, heure de la validation du découpage, nombre de questions
