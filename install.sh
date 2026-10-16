@@ -115,13 +115,11 @@ done
 
 # --- Les hooks --------------------------------------------------------------------------
 #
-# Deux hooks posés dans .claude/settings.json du projet, à côté de l'allowlist, sans toucher
-# au reste du fichier :
-#   - SubagentStart : à chaque sous-agent lancé, panneau-agent.sh ouvre un panneau cmux qui
-#     suit ses grandes étapes (rien sans cmux) ;
-#   - PreToolUse sur Bash : verrou-git.py refuse, avant exécution, tout push vers la branche
-#     principale ou `release`, tout push forcé et tout merge de PR. Le merge est humain ;
-#     ici, ce n'est plus une consigne, c'est un fait.
+# Un hook posé dans .claude/settings.json du projet, à côté de l'allowlist, sans toucher au
+# reste du fichier : PreToolUse sur Bash, verrou-git.py refuse, avant exécution, tout push vers
+# la branche principale ou `release`, tout push forcé et tout merge de PR. Le merge est humain ;
+# ici, ce n'est plus une consigne, c'est un fait.
+# Le hook SubagentStart du panneau cmux (retiré le 16/10) est enlevé s'il est encore là.
 
 python3 - "$PROJET/.claude/settings.json" <<'PY'
 import json, os, sys
@@ -138,13 +136,19 @@ def poser(evenement, matcher, script):
     entrees.append({"matcher": matcher, "hooks": [{"type": "command", "command": cmd}]})
     hooks[evenement] = entrees
 
-poser("SubagentStart", ".*", "cout-agents/panneau-agent.sh")
+def retirer(evenement, script):
+    entrees = [e for e in hooks.get(evenement, [])
+               if not any(script in h.get("command", "") for h in e.get("hooks", []))]
+    if entrees: hooks[evenement] = entrees
+    else: hooks.pop(evenement, None)
+
+retirer("SubagentStart", "panneau-agent.sh")
 poser("PreToolUse", "Bash", "verrou-git/verrou-git.py")
 os.makedirs(os.path.dirname(chemin), exist_ok=True)
 with open(chemin, "w") as f: json.dump(conf, f, indent=2, ensure_ascii=False); f.write("\n")
 PY
-chmod +x "$PROJET/.claude/tools/verrou-git/verrou-git.py" "$PROJET/.claude/tools/cout-agents/panneau-agent.sh"
-echo "  .claude/settings.json — hooks SubagentStart (panneau de suivi) et PreToolUse (verrou git)"
+chmod +x "$PROJET/.claude/tools/verrou-git/verrou-git.py"
+echo "  .claude/settings.json — hook PreToolUse (verrou git)"
 
 # --- La trace ---------------------------------------------------------------------------
 
