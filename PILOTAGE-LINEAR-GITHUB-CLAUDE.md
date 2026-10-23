@@ -358,27 +358,40 @@ Une PR = une livraison : sa description raconte la **livraison entière** (ce
 que ce merge apporte à la feature), pas chaque tâche — le détail par tâche,
 c'est la liste `Closes` et ses cartes Linear.
 
+La description a deux niveaux. Le premier est écrit pour la personne qui
+décide du merge : en mots courants, sans nom de fichier ni jargon. Si elle ne
+peut pas le reformuler, elle ne peut pas juger. Le second, replié, est écrit
+pour le relecteur : c'est là, et seulement là, que vit la technique.
+
 ```markdown
 **Feature « <nom> »** — livraison <n>/<total> « <nom de la livraison> »
 
 ## Ce qui change
-<la livraison en fonctionnel : ce qu'on peut faire après ce merge qu'on ne
- pouvait pas faire avant — 2-4 lignes, lisibles par un non-développeur>
+<ce que l'utilisateur voit, ou « rien de visible », en une phrase ; puis une
+ puce par apport, ouverte par une phrase en gras, avec un exemple concret>
 
-## Comment
-<les choix techniques faits, les alternatives écartées, par où commencer
- la relecture>
+## Ce qui est prouvé
+<du constaté, en mots courants : tests passés, recette jouée, cas vérifiés>
 
-## Preuve
-<du constaté, jamais des cases à cocher : CI verte, sortie réelle collée,
- capture d'écran si interface>
+## Limites connues
+<ce que cette livraison ne fait pas — souvent : les livraisons suivantes —
+ dette assumée>
 
-## Hors périmètre / risques
-<ce que cette livraison ne couvre pas — souvent : les livraisons suivantes —
- dette assumée, renvois de tâches>
+Recette : <lien vers la section du cahier de recette, s'il y en a un>
+
+<details><summary>Détails techniques</summary>
+
+**Comment** — <fichiers et fonctions, choix faits et écartés, par où relire>
+
+**Preuve** — <sortie réelle collée, CI verte, capture d'écran si interface>
+
+</details>
 
 Closes <CODE>-a, <CODE>-b, <CODE>-c
 ```
+
+Le lien vers la fiche n'est pas écrit dans la PR : l'intégration GitHub de
+Linear le publie en commentaire sur chaque PR, si l'option est active.
 
 Pour une tâche isolée (fix/chore), même gabarit sans la ligne Feature.
 
